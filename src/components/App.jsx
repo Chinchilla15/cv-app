@@ -1,10 +1,12 @@
 import "../styles/App.css";
+import CVInput from "./CVInput";
+import CVOutput from "./CVOutput";
 
 function App() {
 	return (
 		<>
-			<h1>CV App Under Construction...</h1>
-			<h2>Please come back later!</h2>
+			<CVInput />
+			<CVOutput />
 		</>
 	);
 }
