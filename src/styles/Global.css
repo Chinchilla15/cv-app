@@ -1,7 +1,7 @@
 :root {
-	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-family: "Inconsolata", Arial, Helvetica, sans-serif;
 	line-height: 1.5;
-	font-weight: 400;
+	font-weight: 600;
 
 	color-scheme: light dark;
 	color: var(--black-color);
@@ -12,10 +12,14 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	--white-color: #ededed;
+	--white-color: #f8f7f4;
 	--black-color: #1b1b1b;
 	--aqua-color: #00adb5;
 	--royal-blue: #0504aa;
+}
+
+body {
+	min-height: 100vh;
 }
 
 * {
@@ -24,9 +28,18 @@
 	box-sizing: border-box;
 }
 
-#root {
+header {
+	font-family: "Archivo", sans-serif;
+	font-style: italic;
+	font-weight: 700;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem;
+}
+
+main {
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
-	min-height: 100vh;
+	justify-content: space-around;
 }
