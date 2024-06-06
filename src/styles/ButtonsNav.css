@@ -1,0 +1,23 @@
+.buttonsNav {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	gap: 20px;
+	margin-right: 12px;
+}
+
+.buttonsNav > button {
+	font-family: "Inconsolata", monospace;
+	font-size: 18px;
+	font-weight: 600;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	border-radius: 12px;
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+	gap: 2px;
+}
