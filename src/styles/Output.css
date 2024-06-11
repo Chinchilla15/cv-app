@@ -1,0 +1,40 @@
+.cvHeader {
+	grid-area: 1/1/2/3;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	background-color: #003049;
+	color: white;
+	padding: 12px;
+	max-height: 200px;
+}
+
+.contactContainer {
+	grid-area: 2/2/2/3;
+	justify-self: center;
+}
+
+.educationContainer {
+	grid-area: 2/1/3/2;
+}
+
+.workContainer {
+	grid-area: 3/1/4/2;
+}
+
+.skillsContainer {
+	grid-area: 3/2/3/3;
+	justify-self: center;
+}
+
+ul {
+	margin-top: 12px;
+}
+
+li {
+	list-style: none;
+}
+
+li > i {
+	margin-right: 5px;
+}
