@@ -6,7 +6,7 @@
 	margin-right: 12px;
 }
 
-.buttonsNav > button {
+.buttonsNav button {
 	font-family: "Inconsolata", monospace;
 	font-size: 18px;
 	font-weight: 600;
@@ -20,4 +20,9 @@
 	height: 100px;
 	cursor: pointer;
 	gap: 2px;
+}
+
+.buttonsNav button.active {
+	background-color: var(--black-color);
+	color: white;
 }
