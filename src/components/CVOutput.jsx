@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import "../styles/App.css";
 import { Fragment } from "react";
 
@@ -20,6 +21,10 @@ function AboutOutput() {
 function ContactOutput() {
 	return (
 		<div className="contactContainer">
+			<div className="contactOutputTitle">
+				<i className="fa-solid fa-user"></i>
+				Contact
+			</div>
 			<ul>
 				<li className="listPhone">
 					<i className="fa-solid fa-phone"></i>Phone
@@ -45,10 +50,15 @@ function ContactOutput() {
 function EducationOutput() {
 	return (
 		<Fragment>
-			<p>Initial Date</p>
-			<p>Final Date</p>
-			<h3>School Name</h3>
-			<h4>Degree</h4>
+			<div className="educationOutputInfo">
+				<h3>Degree</h3>
+				<h4>School Name</h4>
+			</div>
+			<div className="dateContainer">
+				<p className="initialDate">Initial Date</p>
+				&mdash;
+				<p className="finalDate">Final Date</p>
+			</div>
 		</Fragment>
 	);
 }
@@ -56,11 +66,16 @@ function EducationOutput() {
 function WorkOutput() {
 	return (
 		<Fragment>
-			<p>Initial Date</p>
-			<p>Final Date</p>
-			<h3>Role</h3>
-			<h4>Company</h4>
-			<p>Description</p>
+			<div className="workOutputInfo">
+				<h3>Role</h3>
+				<h4>Company</h4>
+				<p>Description</p>
+			</div>
+			<div className="dateContainer">
+				<p className="initialDate">Initial Date</p>
+				&mdash;
+				<p className="finalDate">Final Date</p>
+			</div>
 		</Fragment>
 	);
 }
@@ -68,24 +83,45 @@ function WorkOutput() {
 function SkillsOutput() {
 	return (
 		<div className="skillsContainer">
+			<div className="skillsOutputTitle">
+				<i className="fa-solid fa-lightbulb"></i>
+				Skills
+			</div>
 			<p>Category</p>
-			<p>Skills</p>
+			<ul>
+				<li>Skills</li>
+			</ul>
 		</div>
 	);
 }
 
 export default function CVOutput() {
 	return (
-		<section className="cvOutput">
+		<motion.section
+			className="cvOutput"
+			initial={{ transform: "translateY(100%)" }}
+			animate={{
+				transform: "translateY(0)",
+				transition: { duration: 0.8 },
+			}}
+		>
 			<AboutOutput />
 			<ContactOutput />
 			<div className="educationContainer">
+				<div className="educationOutputTitle">
+					<i className="fa-solid fa-graduation-cap"></i>
+					Education
+				</div>
 				<EducationOutput />
 			</div>
 			<div className="workContainer">
+				<div className="workOutputTitle">
+					<i className="fa-solid fa-briefcase"></i>
+					Work Hsitory
+				</div>
 				<WorkOutput />
 			</div>
 			<SkillsOutput />
-		</section>
+		</motion.section>
 	);
 }
