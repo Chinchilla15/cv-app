@@ -27,14 +27,20 @@
 	border-radius: 15px;
 	box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
 	padding: 10px;
-	width: 400px;
+	/* width: 400px; */
 }
 
 .cvOutput {
-	background-color: black;
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+	grid-template-rows: auto 1fr 1fr;
+	border: 1px solid black;
+	margin: 10px;
+	width: 70dvh;
+	height: 80dvh;
 }
 
-/*
+/* 
 For popover:
 width: clamp(300px, 80vw, 600px); 
-*/
+ */

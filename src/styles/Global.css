@@ -35,7 +35,7 @@ header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 2rem;
+	padding-bottom: 1rem;
 }
 
 main {
@@ -43,3 +43,19 @@ main {
 	align-items: center;
 	justify-content: space-around;
 }
+
+ul {
+	margin-top: 12px;
+}
+
+li {
+	list-style: none;
+}
+
+li > i {
+	margin-right: 5px;
+}
+
+/* p {
+	font-size: 14px;
+} */
