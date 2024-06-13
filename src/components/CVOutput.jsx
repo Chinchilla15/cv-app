@@ -59,18 +59,22 @@ function ContactOutput({ generalInfo }) {
 	);
 }
 
-function EducationOutput() {
+function EducationOutput({ education }) {
 	return (
 		<Fragment>
-			<div className="educationOutputInfo">
-				<h3>Degree</h3>
-				<h4>School Name</h4>
-			</div>
-			<div className="dateContainer">
-				<p className="initialDate">Initial Date</p>
-				&mdash;
-				<p className="finalDate">Final Date</p>
-			</div>
+			{education.map((education, index) => (
+				<div key={index} className="educationOutputBox">
+					<div className="educationOutputInfo">
+						<h3>{education.degree}</h3>
+						<h4>{education.schoolName}</h4>
+					</div>
+					<div className="dateContainer">
+						<p className="initialDate">{education.startDate}</p>
+						&mdash;
+						<p className="finalDate">{education.endDate}</p>
+					</div>
+				</div>
+			))}
 		</Fragment>
 	);
 }
@@ -107,7 +111,7 @@ function SkillsOutput() {
 	);
 }
 
-export default function CVOutput({ generalInfo }) {
+export default function CVOutput({ generalInfo, educationEntries }) {
 	return (
 		<motion.section
 			className="cvOutput"
@@ -124,7 +128,7 @@ export default function CVOutput({ generalInfo }) {
 					<i className="fa-solid fa-graduation-cap"></i>
 					Education
 				</div>
-				<EducationOutput />
+				<EducationOutput education={educationEntries} />
 			</div>
 			<div className="workContainer">
 				<div className="workOutputTitle">
