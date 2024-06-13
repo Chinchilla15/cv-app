@@ -5,7 +5,6 @@ import "./styles/Output.css";
 import CVInput from "./components/CVInput";
 import CVOutput from "./components/CVOutput";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import ButtonsNav from "./components/ButtonsNav";
 import { Fragment, useState } from "react";
 
@@ -24,11 +23,29 @@ function App() {
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat esse cupiditate perferendis illo sit est voluptas earum voluptatum? Alias aliquid placeat quasi veniam atque, magnam ipsum ipsam cupiditate omnis amet.",
 	});
 
+	const [educationEntries, setEducationEntries] = useState([]);
+
 	const handleGeneralInfoChange = (field, value) => {
 		setGeneralInfo((prevInfo) => ({
 			...prevInfo,
 			[field]: value,
 		}));
+	};
+
+	const handleSaveEducation = (newEducation) => {
+		setEducationEntries((prevEntries) => [...prevEntries, newEducation]);
+	};
+
+	const handleDeleteEducation = (index) => {
+		const updatedEntries = educationEntries.filter((_, i) => i !== index);
+		setEducationEntries(updatedEntries);
+	};
+
+	const handleEditEducation = (index, updatedEducation) => {
+		const updatedEntries = educationEntries.map((entry, i) =>
+			i === index ? updatedEducation : entry
+		);
+		setEducationEntries(updatedEntries);
 	};
 	return (
 		<Fragment>
@@ -40,13 +57,17 @@ function App() {
 						activeComponent={activeComponent}
 						generalInfo={generalInfo}
 						onGeneralInfoChange={handleGeneralInfoChange}
+						onSaveEducation={handleSaveEducation}
+						onDeleteEducation={handleDeleteEducation}
+						onEditEducation={handleEditEducation}
+						educationEntries={educationEntries}
 					/>
 				</div>
-				<CVOutput generalInfo={generalInfo} />
+				<CVOutput
+					generalInfo={generalInfo}
+					educationEntries={educationEntries}
+				/>
 			</main>
-			{/*
-			<Footer />
-			*/}
 		</Fragment>
 	);
 }
