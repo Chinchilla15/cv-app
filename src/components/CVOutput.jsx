@@ -1,24 +1,20 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import "../styles/App.css";
 import { Fragment } from "react";
 
-function AboutOutput() {
+function AboutOutput({ generalInfo }) {
 	return (
 		<div className="cvHeader">
-			<h1>Alessandro Chinchilla</h1>
-			<h3>Web Dev / Student</h3>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-				Cupiditate nemo id porro distinctio minima molestiae debitis
-				aperiam quasi ad a, consectetur temporibus enim expedita dolorem
-				natus voluptate, maxime veniam nesciunt!
-			</p>
+			<h1>
+				{generalInfo.firstName} {generalInfo.lastName}
+			</h1>
+			<h3>{generalInfo.occupation}</h3>
+			<p>{generalInfo.summary}</p>
 		</div>
 	);
 }
 
-function ContactOutput() {
+function ContactOutput({ generalInfo }) {
 	return (
 		<div className="contactContainer">
 			<div className="contactOutputTitle">
@@ -27,20 +23,36 @@ function ContactOutput() {
 			</div>
 			<ul>
 				<li className="listPhone">
-					<i className="fa-solid fa-phone"></i>Phone
+					<i className="fa-solid fa-phone"></i>
+					<b>Phone</b>
+					<br />
+					{generalInfo.phone}
 				</li>
 				<li className="listEmail">
-					<i className="fa-solid fa-envelope"></i>Email
+					<i className="fa-solid fa-envelope"></i>
+					<b>Email</b>
+					<br />
+					{generalInfo.email}
 				</li>
 				<li className="listLocation">
-					<i className="fa-solid fa-location-dot"></i>Location
+					<i className="fa-solid fa-location-dot"></i>
+					<b>Location</b>
+					<br />
+					{generalInfo.location}
 				</li>
 				<li className="listLinkedin">
 					<i className="fa-brands fa-linkedin"></i>
-					<a href="#">Linkedin</a>
+					<b>Linkedin</b>
+					<br />
+					<a href={generalInfo.linkedin} target="_blank">
+						{generalInfo.firstName} {generalInfo.lastName}
+					</a>
 				</li>
 				<li className="listLanguages">
-					<i className="fa-solid fa-globe"></i>Languages
+					<i className="fa-solid fa-globe"></i>
+					<b>Languages</b>
+					<br />
+					{generalInfo.languages}
 				</li>
 			</ul>
 		</div>
@@ -95,7 +107,7 @@ function SkillsOutput() {
 	);
 }
 
-export default function CVOutput() {
+export default function CVOutput({ generalInfo }) {
 	return (
 		<motion.section
 			className="cvOutput"
@@ -105,8 +117,8 @@ export default function CVOutput() {
 				transition: { duration: 0.8 },
 			}}
 		>
-			<AboutOutput />
-			<ContactOutput />
+			<AboutOutput generalInfo={generalInfo} />
+			<ContactOutput generalInfo={generalInfo} />
 			<div className="educationContainer">
 				<div className="educationOutputTitle">
 					<i className="fa-solid fa-graduation-cap"></i>
