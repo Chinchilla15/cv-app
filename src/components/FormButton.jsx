@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function FormButtons({ isActive }) {
+export default function FormButtons({ onSave }) {
 	return (
 		<div className="buttonsBox">
 			<motion.button
@@ -8,8 +8,15 @@ export default function FormButtons({ isActive }) {
 					scale: 1.1,
 					transition: { duration: 0.25 },
 				}}
-				className={isActive ? "active" : ""}
-				title="Add"
+				title="Clear"
+				className="clearButton"
+				onClick={() => {
+					document
+						.querySelectorAll(
+							".educationInfo input, .educationInfo date "
+						)
+						.forEach((input) => (input.value = ""));
+				}}
 			>
 				Clear
 			</motion.button>
@@ -18,8 +25,9 @@ export default function FormButtons({ isActive }) {
 					scale: 1.1,
 					transition: { duration: 0.25 },
 				}}
-				title="Remove"
+				title="Save"
 				className="saveButton"
+				onClick={onSave}
 			>
 				Save
 			</motion.button>
