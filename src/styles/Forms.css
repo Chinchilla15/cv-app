@@ -60,10 +60,33 @@ textarea:focus {
 	width: 48px;
 	border-radius: 5px;
 	font-size: 16px;
-	cursor: pointer;
 }
 
 .saveButton {
 	background-color: var(--black-color);
 	color: var(--white-color);
+}
+
+.educationEntryBox {
+	margin-top: 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--deep-blue);
+	color: var(--white-color);
+	height: 30px;
+	border-radius: 8px;
+	padding: 0 10px;
+}
+
+.editDeleteBox {
+	display: flex;
+	gap: 10px;
+	height: 20px;
+}
+
+.editDeleteBox button {
+	width: 48px;
+	border-style: none;
+	border-radius: 4px;
 }
