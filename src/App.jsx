@@ -25,6 +25,8 @@ function App() {
 
 	const [educationEntries, setEducationEntries] = useState([]);
 
+	const [workEntries, setWorkEntries] = useState([]);
+
 	const handleGeneralInfoChange = (field, value) => {
 		setGeneralInfo((prevInfo) => ({
 			...prevInfo,
@@ -47,6 +49,23 @@ function App() {
 		);
 		setEducationEntries(updatedEntries);
 	};
+
+	const handleSaveWork = (newWork) => {
+		setWorkEntries((prevEntries) => [...prevEntries, newWork]);
+	};
+
+	const handleDeleteWork = (index) => {
+		const updateEntries = workEntries.filter((_, i) => i !== index);
+		setWorkEntries(updateEntries);
+	};
+
+	const handleEditwork = (index, updateWork) => {
+		const updateEntries = workEntries.map((entry, i) =>
+			i === index ? updateWork : entry
+		);
+		setWorkEntries(updateEntries);
+	};
+
 	return (
 		<Fragment>
 			<Header />
@@ -61,11 +80,16 @@ function App() {
 						onDeleteEducation={handleDeleteEducation}
 						onEditEducation={handleEditEducation}
 						educationEntries={educationEntries}
+						onSaveWork={handleSaveWork}
+						onDeleteWork={handleDeleteWork}
+						onEditWork={handleEditwork}
+						workEntries={workEntries}
 					/>
 				</div>
 				<CVOutput
 					generalInfo={generalInfo}
 					educationEntries={educationEntries}
+					workEntries={workEntries}
 				/>
 			</main>
 		</Fragment>

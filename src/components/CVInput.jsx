@@ -13,6 +13,10 @@ export default function CVInput({
 	onDeleteEducation,
 	onEditEducation,
 	educationEntries,
+	onSaveWork,
+	onDeleteWork,
+	onEditWork,
+	workEntries,
 }) {
 	const renderComponent = () => {
 		switch (activeComponent) {
@@ -33,7 +37,14 @@ export default function CVInput({
 					/>
 				);
 			case "WorkHistory":
-				return <WorkHistory />;
+				return (
+					<WorkHistory
+						onSave={onSaveWork}
+						onDelete={onDeleteWork}
+						onEdit={onEditWork}
+						entries={workEntries}
+					/>
+				);
 			case "Skills":
 				return <Skills />;
 			default:
