@@ -2,6 +2,11 @@ import { motion } from "framer-motion";
 import "../styles/App.css";
 import { Fragment } from "react";
 
+const formatDate = (date) => {
+	const options = { year: "numeric", month: "short" };
+	return date ? new Date(date).toLocaleDateString(undefined, options) : "";
+};
+
 function AboutOutput({ generalInfo }) {
 	return (
 		<div className="cvHeader">
@@ -69,9 +74,15 @@ function EducationOutput({ education }) {
 						<h4>{education.schoolName}</h4>
 					</div>
 					<div className="dateContainer">
-						<p className="initialDate">{education.startDate}</p>
+						<p className="initialDate">
+							{formatDate(education.startDate)}
+						</p>
 						&mdash;
-						<p className="finalDate">{education.endDate}</p>
+						<p className="finalDate">
+							{education.ongoing
+								? "Present"
+								: formatDate(education.endDate)}
+						</p>
 					</div>
 				</div>
 			))}
