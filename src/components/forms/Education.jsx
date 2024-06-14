@@ -6,8 +6,9 @@ export default function EducationInfo({ onSave, onDelete, onEdit, entries }) {
 	const [education, setEducation] = useState({
 		schoolName: "",
 		degree: "",
-		startDate: "",
-		endDate: "",
+		startDate: null,
+		endDate: null,
+		ongoing: false,
 	});
 
 	const [editIndex, setEditIndex] = useState(null);
@@ -28,8 +29,9 @@ export default function EducationInfo({ onSave, onDelete, onEdit, entries }) {
 		setEducation({
 			schoolName: "",
 			degree: "",
-			startDate: "",
-			endDate: "",
+			startDate: null,
+			endDate: null,
+			ongoing: false,
 		});
 		setEditIndex(null);
 	};
@@ -64,12 +66,28 @@ export default function EducationInfo({ onSave, onDelete, onEdit, entries }) {
 				value={education.startDate}
 				onChange={(value) => handleChange("startDate", value)}
 			/>
+			<br />
 			<Input
 				label={"End Date"}
 				type={"date"}
 				value={education.endDate}
 				onChange={(value) => handleChange("endDate", value)}
+				disabled={education.ongoing}
 			/>
+			<br />
+			<label>
+				Do you still study here?
+				<div className="checkBoxInput">
+					<input
+						type="checkbox"
+						checked={education.ongoing}
+						onChange={(e) =>
+							handleChange("ongoing", e.target.checked)
+						}
+					/>
+					Yes
+				</div>
+			</label>
 			<FormButtons onSave={handleSave} />
 			<div className="educationEntries">
 				{entries.map((entry, index) => (
