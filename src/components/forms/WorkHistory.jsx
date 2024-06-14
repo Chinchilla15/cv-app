@@ -1,29 +1,120 @@
 import FormButtons from "../FormButton";
 import Input from "./Input";
-/*
 import { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
-const Example = () => {
-	const [startDate, setStartDate] = useState(new Date());
-	return (
-		<DatePicker
-			selected={startDate}
-			onChange={(date) => setStartDate(date)}
-		/>
-	);
-};
-*/
-export default function WorkHistory() {
+export default function WorkHistory({ onSave, onDelete, onEdit, entries }) {
+	const [work, setWork] = useState({
+		companyName: "",
+		role: "",
+		startDate: null,
+		endDate: null,
+		ongoing: false,
+		description: "",
+	});
+
+	const [editIndex, setEditIndex] = useState(null);
+
+	const handleChange = (field, value) => {
+		setWork((prev) => ({
+			...prev,
+			[field]: value,
+		}));
+	};
+
+	const handleSave = () => {
+		if (editIndex !== null) {
+			onEdit(editIndex, work);
+		} else {
+			onSave(work);
+		}
+		setWork({
+			companyName: "",
+			role: "",
+			startDate: null,
+			endDate: null,
+			ongoing: false,
+			description: "",
+		});
+		setEditIndex(null);
+	};
+
+	const handleEditClick = (index) => {
+		setEditIndex(index);
+		setWork(entries[index]);
+	};
+
+	const handleDeleteClick = (index) => {
+		onDelete(index);
+	};
+
 	return (
 		<div className="profInfo">
-			<Input label="Company name" />
-			<Input label="Role" />
-			<Input label="Start date" type={"date"} />
-			<Input label="End date" type={"date"} />
-			<Input label="Role Description" />
-			<FormButtons />
+			<Input
+				label="Company name"
+				type={"text"}
+				value={work.companyName}
+				onChange={(value) => handleChange("companyName", value)}
+			/>
+			<Input
+				label="Role"
+				type={"text"}
+				value={work.role}
+				onChange={(value) => handleChange("role", value)}
+			/>
+			<Input
+				label="Start Date"
+				type={"date"}
+				value={work.startDate}
+				onChange={(value) => handleChange("startDate", value)}
+			/>
+			<br />
+			<Input
+				label="End Date"
+				type={"date"}
+				value={work.endDate}
+				onChange={(value) => handleChange("endDate", value)}
+				disabled={work.ongoing}
+			/>
+			<br />
+			<label>
+				Do you still work here?
+				<div className="checkBoxInput">
+					<input
+						type="checkbox"
+						checked={work.ongoing}
+						onChange={(e) =>
+							handleChange("ongoing", e.target.checked)
+						}
+					/>
+					Yes
+				</div>
+			</label>
+			<Input
+				label="Role Description"
+				type={"text"}
+				value={work.description}
+				onChange={(value) => handleChange("description", value)}
+			/>
+			<FormButtons onSave={handleSave} />
+			<div className="workEntries">
+				{entries.map((entry, index) => (
+					<div key={index} className="workEntryBox">
+						<p>{entry.role}</p>
+						<div className="editDeleteBox">
+							<button onClick={() => handleEditClick(index)}>
+								Edit
+							</button>
+							<button
+								onClick={() => {
+									handleDeleteClick(index);
+								}}
+							>
+								Delete
+							</button>
+						</div>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 }
