@@ -90,19 +90,29 @@ function EducationOutput({ education }) {
 	);
 }
 
-function WorkOutput() {
+function WorkOutput({ work }) {
 	return (
 		<Fragment>
-			<div className="workOutputInfo">
-				<h3>Role</h3>
-				<h4>Company</h4>
-				<p>Description</p>
-			</div>
-			<div className="dateContainer">
-				<p className="initialDate">Initial Date</p>
-				&mdash;
-				<p className="finalDate">Final Date</p>
-			</div>
+			{work.map((work, index) => (
+				<div key={index} className="workOutputBox">
+					<div className="workOutputInfo">
+						<h3>{work.role}</h3>
+						<h4>{work.companyName}</h4>
+						<p>{work.description}</p>
+					</div>
+					<div className="dateContainer">
+						<p className="initialDate">
+							{formatDate(work.startDate)}
+						</p>
+						&mdash;
+						<p className="finalDate">
+							{work.ongoing
+								? "Present"
+								: formatDate(work.endDate)}
+						</p>
+					</div>
+				</div>
+			))}
 		</Fragment>
 	);
 }
@@ -122,7 +132,11 @@ function SkillsOutput() {
 	);
 }
 
-export default function CVOutput({ generalInfo, educationEntries }) {
+export default function CVOutput({
+	generalInfo,
+	educationEntries,
+	workEntries,
+}) {
 	return (
 		<motion.section
 			className="cvOutput"
@@ -146,7 +160,7 @@ export default function CVOutput({ generalInfo, educationEntries }) {
 					<i className="fa-solid fa-briefcase"></i>
 					Work Hsitory
 				</div>
-				<WorkOutput />
+				<WorkOutput work={workEntries} />
 			</div>
 			<SkillsOutput />
 		</motion.section>
