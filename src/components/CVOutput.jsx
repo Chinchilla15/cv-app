@@ -117,17 +117,21 @@ function WorkOutput({ work }) {
 	);
 }
 
-function SkillsOutput() {
+function SkillsOutput({ skills }) {
 	return (
 		<div className="skillsContainer">
 			<div className="skillsOutputTitle">
 				<i className="fa-solid fa-lightbulb"></i>
 				Skills
 			</div>
-			<p>Category</p>
-			<ul>
-				<li>Skills</li>
-			</ul>
+			{skills.map((skills, index) => (
+				<div key={index} className="skillsOutputBox">
+					<p>
+						<b>{skills.category}: </b>
+					</p>
+					<p className="skillsDetails">{skills.details}</p>
+				</div>
+			))}
 		</div>
 	);
 }
@@ -136,6 +140,7 @@ export default function CVOutput({
 	generalInfo,
 	educationEntries,
 	workEntries,
+	skillsEntries,
 }) {
 	return (
 		<motion.section
@@ -162,7 +167,7 @@ export default function CVOutput({
 				</div>
 				<WorkOutput work={workEntries} />
 			</div>
-			<SkillsOutput />
+			<SkillsOutput skills={skillsEntries} />
 		</motion.section>
 	);
 }
