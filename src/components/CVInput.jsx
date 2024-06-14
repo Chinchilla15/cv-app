@@ -17,6 +17,10 @@ export default function CVInput({
 	onDeleteWork,
 	onEditWork,
 	workEntries,
+	onSaveSkills,
+	onDeleteSkills,
+	onEditSkills,
+	skillsEntries,
 }) {
 	const renderComponent = () => {
 		switch (activeComponent) {
@@ -46,7 +50,14 @@ export default function CVInput({
 					/>
 				);
 			case "Skills":
-				return <Skills />;
+				return (
+					<Skills
+						onSave={onSaveSkills}
+						onDelete={onDeleteSkills}
+						onEdit={onEditSkills}
+						entries={skillsEntries}
+					/>
+				);
 			default:
 				return (
 					<GeneralInfo
