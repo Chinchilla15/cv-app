@@ -12,14 +12,11 @@
 	background-color: black;
 	bottom: 0;
 	left: 0;
-	/* transform-origin: left;
-	transform: scaleX(1);
-	transition: transform 0.5s ease-in; */
 }
 .inputContainer {
 	display: flex;
 	flex-direction: row;
-	max-width: 500px;
+	max-width: 550px;
 }
 
 .cvInput {
@@ -27,10 +24,26 @@
 	border-radius: 15px;
 	box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
 	padding: 10px;
-	/* width: 400px; */
+	width: 400px;
+}
+
+.extraButtons {
+	width: 50px;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.extraButtons button {
+	width: 40px;
+	height: 40px;
+	border-radius: 4px;
+	border-style: none;
 }
 
 .cvOutput {
+	cursor: default;
 	display: grid;
 	grid-template-columns: 4fr 1fr;
 	grid-template-rows: auto 1fr 1fr;
@@ -38,6 +51,7 @@
 	margin: 10px;
 	width: 70dvh;
 	height: 80dvh;
+	background-color: white;
 }
 
 /* 
