@@ -9,7 +9,7 @@ import Header from "./components/Header";
 import ButtonsNav from "./components/ButtonsNav";
 import { Button } from "./components/ButtonsNav";
 import Modal from "./components/Modal";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 
 function App() {
 	const [activeComponent, setActiveComponent] = useState("GeneralInfo");
@@ -164,6 +164,10 @@ function App() {
 		]);
 		setIsLoadModalOpen(false);
 	};
+
+	useEffect(() => {
+		loadTemplate();
+	}, []);
 
 	return (
 		<Fragment>
