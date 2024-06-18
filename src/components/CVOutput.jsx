@@ -1,20 +1,38 @@
 import { motion } from "framer-motion";
 import "../styles/App.css";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import { Button } from "./ButtonsNav";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const formatDate = (date) => {
 	const options = { year: "numeric", month: "short" };
 	return date ? new Date(date).toLocaleDateString(undefined, options) : "";
 };
+const downloadPDF = () => {
+	const input = document.getElementById("CV");
+	html2canvas(input, {
+		scale: 2,
+		useCORS: true,
+	}).then((canvas) => {
+		const imgData = canvas.toDataURL("image/png");
+		const pdf = new jsPDF("p", "mm", "a4");
+		const pdfWidth = pdf.internal.pageSize.getWidth();
+		const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-function AboutOutput({ generalInfo }) {
+		pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+		pdf.save("CV.pdf");
+	});
+};
+
+function AboutOutput({ generalInfo, selectedColor }) {
 	return (
-		<div className="cvHeader">
+		<div className="cvHeader" style={{ backgroundColor: selectedColor }}>
 			<h1>
 				{generalInfo.firstName} {generalInfo.lastName}
 			</h1>
 			<h3>{generalInfo.occupation}</h3>
-			<p>{generalInfo.summary}</p>
+			<p className="summaryOutput">{generalInfo.summary}</p>
 		</div>
 	);
 }
@@ -50,7 +68,7 @@ function ContactOutput({ generalInfo }) {
 					<b>Linkedin</b>
 					<br />
 					<a href={generalInfo.linkedin} target="_blank">
-						{generalInfo.firstName} {generalInfo.lastName}
+						{generalInfo.linkedin}
 					</a>
 				</li>
 				<li className="listLanguages">
@@ -142,32 +160,93 @@ export default function CVOutput({
 	workEntries,
 	skillsEntries,
 }) {
+	const [colorPickerOpen, setColorPickerOpen] = useState(false);
+	const [selectedColor, setSelectedColor] = useState("#003049"); // Default color
+
+	const handleColorPickerToggle = () => {
+		setColorPickerOpen(!colorPickerOpen);
+	};
+
+	const handleColorChange = (color) => {
+		setSelectedColor(color);
+		setColorPickerOpen(false);
+	};
 	return (
-		<motion.section
-			className="cvOutput"
-			initial={{ transform: "translateY(100%)" }}
-			animate={{
-				transform: "translateY(0)",
-				transition: { duration: 0.8 },
-			}}
-		>
-			<AboutOutput generalInfo={generalInfo} />
-			<ContactOutput generalInfo={generalInfo} />
-			<div className="educationContainer">
-				<div className="educationOutputTitle">
-					<i className="fa-solid fa-graduation-cap"></i>
-					Education
+		<Fragment>
+			<div className="outputContainer">
+				<motion.section
+					id="CV"
+					className="cvOutput"
+					initial={{ transform: "translateY(100%)" }}
+					animate={{
+						transform: "translateY(0)",
+						transition: { duration: 0.8 },
+					}}
+				>
+					<AboutOutput
+						generalInfo={generalInfo}
+						selectedColor={selectedColor}
+					/>
+					<ContactOutput generalInfo={generalInfo} />
+					<div className="workContainer">
+						<div className="workOutputTitle">
+							<i className="fa-solid fa-briefcase"></i>
+							Work Hsitory
+						</div>
+						<WorkOutput work={workEntries} />
+					</div>
+					<div className="educationContainer">
+						<div className="educationOutputTitle">
+							<i className="fa-solid fa-graduation-cap"></i>
+							Education
+						</div>
+						<EducationOutput education={educationEntries} />
+					</div>
+					<SkillsOutput skills={skillsEntries} />
+				</motion.section>
+				<div className="outputButtons">
+					<Button
+						iconName={" fa-download fa-xl"}
+						title={"Download"}
+						onClick={downloadPDF}
+					/>
+					<Button
+						text={"Color"}
+						title={"Color"}
+						iconName={" fa-palette"}
+						onClick={handleColorPickerToggle}
+					/>
+					{colorPickerOpen && (
+						<div className="color-picker">
+							<button
+								className="redColor"
+								title="Red Color"
+								onClick={() => handleColorChange("#8B0000")}
+							></button>
+							<button
+								className="greenColor"
+								title="Green Color"
+								onClick={() => handleColorChange("#254336")}
+							></button>
+							<button
+								className="maroonColor"
+								title="Maroon Color"
+								onClick={() => handleColorChange("#7B2D26")}
+							></button>
+							<button
+								className="blackColor"
+								title="Black Color"
+								onClick={() => handleColorChange("#1b1b1b")}
+							></button>
+							<button
+								className="blueColor"
+								title="Blue Color"
+								onClick={() => handleColorChange("#003049")}
+							></button>
+						</div>
+					)}
 				</div>
-				<EducationOutput education={educationEntries} />
 			</div>
-			<div className="workContainer">
-				<div className="workOutputTitle">
-					<i className="fa-solid fa-briefcase"></i>
-					Work Hsitory
-				</div>
-				<WorkOutput work={workEntries} />
-			</div>
-			<SkillsOutput skills={skillsEntries} />
-		</motion.section>
+		</Fragment>
 	);
 }
