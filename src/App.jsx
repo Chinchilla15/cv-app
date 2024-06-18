@@ -140,8 +140,8 @@ function App() {
 			phone: "+503 7777 3333",
 			location: "San Salvador, El Salvador",
 			occupation: "Student / Web Dev",
-			languages: "Spanish, English, French",
-			linkedin: "https://linkedin.com/in/alessandro-chinchilla-",
+			languages: "Spanish, English, Mandarin",
+			linkedin: "linkedin.com/in/alessandro-chinchilla-",
 			summary:
 				"Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat esse cupiditate perferendis illo sit est voluptas earum voluptatum? Alias aliquid placeat quasi veniam atque, magnam ipsum ipsam cupiditate omnis amet.",
 		});
@@ -149,7 +149,7 @@ function App() {
 			{
 				schoolName: "Harvard University",
 				degree: "Cool Degree",
-				startDate: "Feb 2021",
+				startDate: "2021-02",
 				endDate: null,
 				ongoing: true,
 			},
@@ -157,8 +157,8 @@ function App() {
 		setWorkEntries([
 			{
 				companyName: "Apple Inc.",
-				role: "Janitor",
-				startDate: "Jan 2020",
+				role: "Code Janitor",
+				startDate: "2021-05",
 				endDate: null,
 				ongoing: true,
 				description: "Clean code for all Apple Software and floors",
@@ -168,7 +168,7 @@ function App() {
 			{
 				category: "Front-end Skills",
 				details:
-					"HTML, CSS, JavaScript, React, Jest, Tailwind, Bootstrap, Vite",
+					"HTML, CSS, JavaScript, React, Jest, Tailwind, Bootstrap, Git, Webpack",
 			},
 		]);
 		setIsLoadModalOpen(false);
@@ -264,7 +264,8 @@ function App() {
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					Visit My Website <i className="fa-solid fa-image-portrait"></i>
+					Visit My Website{" "}
+					<i className="fa-solid fa-image-portrait"></i>
 				</a>
 			</Modal>
 		</Fragment>
