@@ -33,6 +33,7 @@ function App() {
 
 	const [isCleanModalOpen, setIsCleanModalOpen] = useState(false);
 	const [isLoadModalOpen, setIsLoadModalOpen] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
 	const handleGeneralInfoChange = (field, value) => {
 		setGeneralInfo((prevInfo) => ({
@@ -103,6 +104,14 @@ function App() {
 
 	const closeLoadModal = () => {
 		setIsLoadModalOpen(false);
+	};
+
+	const handleAboutClick = () => {
+		setShowModal(true);
+	};
+
+	const handleCloseModal = () => {
+		setShowModal(false);
 	};
 
 	const resetTemplate = () => {
@@ -205,6 +214,12 @@ function App() {
 							iconName={"fa-file-import"}
 							onClick={openLoadModal}
 						/>
+						<Button
+							text={"About"}
+							title={"About"}
+							iconName={" fa-info fa-lg"}
+							onClick={handleAboutClick}
+						/>
 					</div>
 				</div>
 				<CVOutput
@@ -219,7 +234,7 @@ function App() {
 				onClose={closeCleanModal}
 				onConfirm={resetTemplate}
 				title="Confirmation"
-				message="Are you sure you want to clear all the fields?"
+				message="Are you sure you want to clear all the fields? This action cannot be undone"
 			/>
 			<Modal
 				isOpen={isLoadModalOpen}
@@ -228,6 +243,30 @@ function App() {
 				title="Load Template"
 				message="Are you sure you want to load the template? This will overwrite your current data."
 			/>
+			<Modal
+				isOpen={showModal}
+				onClose={handleCloseModal}
+				showCloseButton={true}
+				title="About This App"
+				message="This app helps you generate a CV by filling the forms and download  it for free."
+			>
+				<p>Created by Alessandro Chinchilla.</p>
+				<a
+					href="https://github.com/chinchilla15"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Visit My GitHub <i className="fa-brands fa-github"></i>
+				</a>
+				<br />
+				<a
+					href="https://chinchilla15.github.io/portfolio/"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Visit My Website <i className="fa-solid fa-image-portrait"></i>
+				</a>
+			</Modal>
 		</Fragment>
 	);
 }
