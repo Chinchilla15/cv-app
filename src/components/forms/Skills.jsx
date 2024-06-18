@@ -30,6 +30,13 @@ export default function Skills({ onSave, onDelete, onEdit, entries }) {
 		setEditIndex(null);
 	};
 
+	const handleClear = () => {
+		setSkills({
+			category: "",
+			details: "",
+		});
+	};
+
 	const handleEditClick = (index) => {
 		setEditIndex(index);
 		setSkills(entries[index]);
@@ -55,16 +62,20 @@ export default function Skills({ onSave, onDelete, onEdit, entries }) {
 				placeholder={"Disciplined, Organized, Responsible..."}
 				onChange={(value) => handleChange("details", value)}
 			/>
-			<FormButtons onSave={handleSave} />
+			<FormButtons onSave={handleSave} onClear={handleClear} />
 			<div className="skillsEntries">
 				{entries.map((entry, index) => (
 					<div key={index} className="skillsEntryBox">
 						<p>{entry.category}</p>
 						<div className="editDeleteBox">
-							<button onClick={() => handleEditClick(index)}>
+							<button
+								title="Edit"
+								onClick={() => handleEditClick(index)}
+							>
 								Edit
 							</button>
 							<button
+								title="Delete"
 								onClick={() => {
 									handleDeleteClick(index);
 								}}

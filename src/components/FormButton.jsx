@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function FormButtons({ onSave }) {
+export default function FormButtons({ onSave, onClear }) {
 	return (
 		<div className="buttonsBox">
 			<motion.button
@@ -10,13 +10,7 @@ export default function FormButtons({ onSave }) {
 				}}
 				title="Clear"
 				className="clearButton"
-				onClick={() => {
-					document
-						.querySelectorAll(
-							".educationInfo input, .educationInfo date "
-						)
-						.forEach((input) => (input.value = ""));
-				}}
+				onClick={onClear}
 			>
 				Clear
 			</motion.button>

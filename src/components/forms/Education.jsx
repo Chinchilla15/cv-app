@@ -36,6 +36,16 @@ export default function EducationInfo({ onSave, onDelete, onEdit, entries }) {
 		setEditIndex(null);
 	};
 
+	const handleClear = () => {
+		setEducation({
+			schoolName: "",
+			degree: "",
+			startDate: null,
+			endDate: null,
+			ongoing: false,
+		});
+	};
+
 	const handleEditClick = (index) => {
 		setEditIndex(index);
 		setEducation(entries[index]);
@@ -88,16 +98,20 @@ export default function EducationInfo({ onSave, onDelete, onEdit, entries }) {
 					Yes
 				</div>
 			</label>
-			<FormButtons onSave={handleSave} />
+			<FormButtons onSave={handleSave} onClear={handleClear} />
 			<div className="educationEntries">
 				{entries.map((entry, index) => (
 					<div key={index} className="educationEntryBox">
 						<p>{entry.degree}</p>
 						<div className="editDeleteBox">
-							<button onClick={() => handleEditClick(index)}>
+							<button
+								title="Edit"
+								onClick={() => handleEditClick(index)}
+							>
 								Edit
 							</button>
 							<button
+								title="Delete"
 								onClick={() => {
 									handleDeleteClick(index);
 								}}

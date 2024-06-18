@@ -38,6 +38,17 @@ export default function WorkHistory({ onSave, onDelete, onEdit, entries }) {
 		setEditIndex(null);
 	};
 
+	const handleClear = () => {
+		setWork({
+			companyName: "",
+			role: "",
+			startDate: null,
+			endDate: null,
+			ongoing: false,
+			description: "",
+		});
+	};
+
 	const handleEditClick = (index) => {
 		setEditIndex(index);
 		setWork(entries[index]);
@@ -95,16 +106,20 @@ export default function WorkHistory({ onSave, onDelete, onEdit, entries }) {
 				value={work.description}
 				onChange={(value) => handleChange("description", value)}
 			/>
-			<FormButtons onSave={handleSave} />
+			<FormButtons onSave={handleSave} onClear={handleClear} />
 			<div className="workEntries">
 				{entries.map((entry, index) => (
 					<div key={index} className="workEntryBox">
 						<p>{entry.role}</p>
 						<div className="editDeleteBox">
-							<button onClick={() => handleEditClick(index)}>
+							<button
+								title="Edit"
+								onClick={() => handleEditClick(index)}
+							>
 								Edit
 							</button>
 							<button
+								title="Delete"
 								onClick={() => {
 									handleDeleteClick(index);
 								}}
