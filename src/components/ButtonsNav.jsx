@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 
-function Button({ text, iconName, onClick }) {
+function Button({ text, title, iconName, isActive, onClick }) {
 	return (
 		<motion.button
 			initial={{ opacity: 0 }}
@@ -11,6 +12,8 @@ function Button({ text, iconName, onClick }) {
 			}}
 			whileTap={{ scale: 1 }}
 			onClick={onClick}
+			className={isActive ? "active" : ""}
+			title={title}
 		>
 			<i className={`fa-solid ${iconName}`}></i>
 			{text}
@@ -19,28 +22,44 @@ function Button({ text, iconName, onClick }) {
 }
 
 export default function ButtonsNav({ setActiveComponent }) {
+	const [activeButton, setActiveButton] = useState("GeneralInfo");
+
+	const handleButtonClick = (componentName) => {
+		setActiveButton(componentName);
+		setActiveComponent(componentName);
+	};
 	return (
 		<div className="buttonsNav">
 			<Button
 				text={"General Info"}
+				title={"General Info"}
 				iconName={"fa-user"}
-				onClick={() => setActiveComponent("GeneralInfo")}
+				isActive={activeButton === "GeneralInfo"}
+				onClick={() => handleButtonClick("GeneralInfo")}
 			/>
 			<Button
 				text={"Education"}
+				title={"Education"}
 				iconName={"fa-graduation-cap"}
-				onClick={() => setActiveComponent("EducationInfo")}
+				isActive={activeButton === "EducationInfo"}
+				onClick={() => handleButtonClick("EducationInfo")}
 			/>
 			<Button
 				text={"Work History"}
+				title={"Work History"}
 				iconName={"fa-briefcase"}
-				onClick={() => setActiveComponent("WorkHistory")}
+				isActive={activeButton === "WorkHistory"}
+				onClick={() => handleButtonClick("WorkHistory")}
 			/>
 			<Button
 				text={"Skills"}
+				title={"Skills"}
 				iconName={"fa-lightbulb"}
-				onClick={() => setActiveComponent("Skills")}
+				isActive={activeButton === "Skills"}
+				onClick={() => handleButtonClick("Skills")}
 			/>
 		</div>
 	);
 }
+
+export { Button };
