@@ -16,6 +16,9 @@
 	--black-color: #1b1b1b;
 	--aqua-color: #00adb5;
 	--royal-blue: #0504aa;
+	--deep-blue: #003049;
+	--red-color: #c1111f;
+	--green-color: #285430;
 }
 
 body {
@@ -46,16 +49,58 @@ main {
 
 ul {
 	margin-top: 12px;
+	text-wrap: wrap;
 }
 
 li {
 	list-style: none;
+	font-size: 12px;
+	text-wrap: wrap;
 }
 
 li > i {
 	margin-right: 5px;
+	font-size: 14px;
 }
 
-/* p {
-	font-size: 14px;
-} */
+a {
+	text-decoration: none;
+	color: var(--deep-blue);
+}
+
+button {
+	cursor: pointer;
+}
+
+input {
+	height: 24px;
+	width: 100%;
+}
+
+textarea {
+	resize: none;
+	width: 100%;
+	height: 100%;
+	letter-spacing: 1px;
+	line-height: 1.5;
+}
+
+input,
+textarea {
+	border-radius: 5px;
+	background-color: white;
+	color: black;
+	border: 1px solid #ababab;
+	padding: 4px;
+	outline: 1;
+	outline-color: var(--deep-blue);
+}
+
+input:disabled {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+textarea:placeholder-shown,
+input:placeholder-shown {
+	font-style: italic;
+}
