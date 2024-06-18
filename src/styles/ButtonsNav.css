@@ -20,6 +20,8 @@
 	height: 100px;
 	cursor: pointer;
 	gap: 2px;
+	border-style: none;
+	border: 2px solid black;
 }
 
 .buttonsNav button.active {
