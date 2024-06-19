@@ -77,12 +77,12 @@
 
 #CV {
 	height: 297mm;
+	width: 210mm;
+	margin: 10px;
 	cursor: default;
 	display: grid;
 	grid-template-columns: 4fr 1fr;
 	grid-template-rows: auto 1fr 1fr;
 	border: 1px solid black;
-	margin: 10px;
-	width: 70dvh;
 	background-color: white;
 }
